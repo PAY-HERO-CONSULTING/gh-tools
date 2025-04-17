@@ -11,7 +11,6 @@ type Login struct {
 	Email          string            `json:"email"`
 	UserID         string            `json:"user_id"`
 	IsAdmin        bool              `json:"is_admin"`
-	AccountIDs     []string          `json:"account_ids"`
 	SessionID      string            `json:"session_id"`
 	Status         string            `json:"status"`
 	Roles          map[string]string `json:"roles"`
@@ -26,7 +25,6 @@ func (l Login) ClaimsForAccessToken() AccessTokenClaims {
 func (l Login) claimsForUser() AccessTokenClaims {
 	return AccessTokenClaims{
 		UserID:         l.UserID,
-		AccountIDs:     l.AccountIDs,
 		Username:       l.Username,
 		Roles:          l.Roles,
 		Status:         l.Status,

@@ -6,9 +6,7 @@ import (
 	"time"
 
 	"github.com/PAY-HERO-CONSULTING/gh-tools/apperrs"
-	"github.com/PAY-HERO-CONSULTING/gh-tools/logger"
 	"github.com/PAY-HERO-CONSULTING/gh-tools/models"
-	"github.com/PAY-HERO-CONSULTING/gh-tools/null"
 	"github.com/golang-jwt/jwt/v4"
 )
 
@@ -92,41 +90,6 @@ func NewJWTManager(
 }
 
 func (m *JWTManager) Generate(
-	hmacSecretKey string,
-	organizationID string,
-	userData []byte,
-	userAccounts []string,
-	userAccountRoles map[string]string,
-	sessionID *string,
-) (string, error) {
-	var user models.User
-
-	err := json.Unmarshal(userData, &user)
-	if err != nil {
-		logger.Errorf("failed to unmarshall into user: [%v] err: [%+v]", userData, err)
-		return "", err
-	}
-
-	login := &Login{
-		Username:       user.UserName,
-		Email:          user.Email,
-		IsAdmin:        user.IsAdmin,
-		UserID:         user.ID,
-		Status:         user.Status.String(),
-		AccountIDs:     userAccounts,
-		Roles:          userAccountRoles,
-		SessionID:      null.ValueFromNull(sessionID),
-		OrganizationID: organizationID,
-	}
-
-	claims := login.ClaimsForAccessToken()
-
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
-	return token.SignedString([]byte(hmacSecretKey))
-}
-
-func (m *JWTManager) GenerateV2(
 	hmacSecretKey string,
 	organizationID string,
 	sessionID string,
