@@ -14,6 +14,7 @@ type Filter struct {
 	Category            string
 	BusinessAccountID   *string
 	AssignedAccountID   *string
+	AssignedUserID      *string
 	OrganizationID      *string
 	CheckoutRequestID   *string
 	LedgerType          *string
@@ -62,6 +63,7 @@ func (f *Filter) NoPagination() *Filter {
 		AccountID:           f.AccountID,
 		BusinessAccountID:   f.BusinessAccountID,
 		AssignedAccountID:   f.AssignedAccountID,
+		AssignedUserID:      f.AssignedUserID,
 		OrganizationID:      f.OrganizationID,
 		LedgerType:          f.LedgerType,
 		CheckoutRequestID:   f.CheckoutRequestID,
