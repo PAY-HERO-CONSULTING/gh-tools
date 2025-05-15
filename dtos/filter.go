@@ -13,6 +13,8 @@ type Filter struct {
 	AccountID           *string
 	Category            string
 	BusinessAccountID   *string
+	ApplicationID       *string
+	SerialNumber        *string
 	AssignedAccountID   *string
 	AssignedUserID      *string
 	OrganizationID      *string
